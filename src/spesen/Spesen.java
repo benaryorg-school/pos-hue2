@@ -38,6 +38,20 @@ public class Spesen {
     private boolean genehmigt;
     private String beschreibung;
     
+	public Spesen()
+	{
+		this(new Date(),0,Kategorie.ANDERE,false,"");
+	}
+
+	public Spesen(Date a,double b,Kategorie c,boolean d,String e)
+	{
+		this.datum=a;
+		this.betrag=b;
+		this.kategorie=c;
+		this.genehmigt=d;
+		this.beschreibung=e;
+	}
+
 	public static Class<?> kategories()
 	{
 		return Kategorie.class;

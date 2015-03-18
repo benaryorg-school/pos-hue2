@@ -1,9 +1,9 @@
 package org.benary.java.school;
 
 import javax.swing.*;
-import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import spesen.Spesen;
 
 /**
  *
@@ -20,21 +20,24 @@ public class Main
 
 		f.setLayout(new BorderLayout());
 
-		TableModel tm=new MyTableModel();
+		final MyTableModel tm=new MyTableModel();
 		JTable tab=new JTable(tm);
-		f.add(tab,BorderLayout.CENTER);
+		JScrollPane pane=new JScrollPane(tab);
+		f.add(pane,BorderLayout.CENTER);
 
 		JPanel panel=new JPanel();
+		panel.setLayout(new GridLayout());
+		f.add(panel,BorderLayout.SOUTH);
 
-		JButton add=new JButton("xyz");
+		JButton add=new JButton();
 		add.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("click");
+				tm.add(new Spesen());
 			}
 		});
-		f.add(add,BorderLayout.SOUTH);
+		panel.add(add);
 
 		f.pack();
 		SwingUtilities.invokeLater(new Runnable()
