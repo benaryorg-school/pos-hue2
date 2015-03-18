@@ -1,7 +1,7 @@
 GCJ:=gcj
 
 CLASSPATH:=src/
-MAINCLASS:=org.benary.java.school.wow.what.is.that.strange.name.of.that.pkg.why.am.i.doing.those.horrible.things.like.writing.my.code.in.such.a.pkg.declaration.VeryPrivateAndEncapsulatedWindowClassWhichDoesOnlyContainAMainMethodBecauseIAmProgrammingCStyle
+MAINCLASS:=org.benary.java.school.Main
 
 JFLAGS:=--classpath=$(CLASSPATH)
 
