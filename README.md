@@ -15,8 +15,14 @@ To compile the program just run `make jar` to compile it to a _jar_ file named
 
 ### Reusing the Repo
 
-If you want to reuse this repo for a different project, just remove the
-`src/.gitignore` file.
+If you want to use this repo for a different project, just add it as a remote:
+
+	$ cd your_project/
+	$ mv src/ oldsrc/ # just to be sure
+	$ git remote add gcj-makefile git://benary.org/benaryorg/gcj-makefile.git
+	$ git pull gcj-makefile master
+	$ mv oldsrc/* src/
+	$ rmdir oldsrc/
 
 ## License
 
