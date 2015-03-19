@@ -38,7 +38,7 @@ public class MyTableModel extends AbstractTableModel
 	{
 		//Java has no static variables in functions http://stackoverflow.com/questions/5033627/static-variable-inside-of-a-function-in-c
 		//FUCK JAVA
-		return new Class[]{Date.class,double.class,Spesen.kategories(),boolean.class,String.class}[columnIndex];
+		return new Class[]{Date.class,Double.class,Spesen.kategories(),Boolean.class,String.class}[columnIndex];
 	}
 
 	public boolean isCellEditable(int rowIndex,int columnIndex)
@@ -55,7 +55,7 @@ public class MyTableModel extends AbstractTableModel
 
 	public void setValueAt(Object aValue,int rowIndex,int columnIndex)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		list.get(rowIndex).set(columnIndex+4,aValue);
 	}
 }
 

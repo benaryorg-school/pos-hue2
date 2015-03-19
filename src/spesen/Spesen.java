@@ -43,13 +43,13 @@ public class Spesen {
 		this(new Date(),0,Kategorie.ANDERE,false,"");
 	}
 
-	public Spesen(Date a,double b,Kategorie c,boolean d,String e)
+	public Spesen(Date date,double price,Kategorie category,boolean accepted,String description)
 	{
-		this.datum=a;
-		this.betrag=b;
-		this.kategorie=c;
-		this.genehmigt=d;
-		this.beschreibung=e;
+		this.datum=date;
+		this.betrag=price;
+		this.kategorie=category;
+		this.genehmigt=accepted;
+		this.beschreibung=description;
 	}
 
 	public static Class<?> kategories()
@@ -60,6 +60,19 @@ public class Spesen {
 	public Object get(int col)
 	{
 		return new Object[]{this.datum,this.betrag,this.kategorie,this.genehmigt,this.beschreibung}[col];
+	}
+    
+	public void set(int i,Object val)
+	{
+		switch(i)
+		{
+			case 0:this.datum=(Date)val;break;
+			case 1:this.betrag=(Double)val;break;
+			case 2:this.kategorie=(Kategorie)val;break;
+			case 3:this.genehmigt=(Boolean)val;break;
+			case 4:this.beschreibung=(String)val;break;
+			default:Object o=new Object[]{}[1];//shorter than "throw new IndexOutOfBoundsException()"
+		}
 	}
     
     public static void main(String[] args) {
