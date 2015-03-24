@@ -12,8 +12,13 @@ public class MyTableModel extends AbstractTableModel
 
 	public void add(Spesen s)
 	{
-		this.list.add(s);
-		fireTableDataChanged();
+		this.add(this.list.size(),s);
+	}
+	
+	public void add(int i,Spesen s)
+	{
+		this.list.add(i,s);
+		fireTableRowsInserted(i,i);
 	}
 
 	public int getRowCount()
@@ -31,7 +36,7 @@ public class MyTableModel extends AbstractTableModel
 		//Java has no Internalisation. http://doc.qt.io/qt-5/internationalization.html
 		//FUCK JAVA
 		//return new String[]{""}[columnIndex];
-		return "";
+		return "***";
 	}
 
 	public Class<?> getColumnClass(int columnIndex)

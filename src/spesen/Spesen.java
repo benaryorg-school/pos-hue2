@@ -64,14 +64,35 @@ public class Spesen {
     
 	public void set(int i,Object val)
 	{
-		switch(i)
+		try
 		{
-			case 0:this.datum=(Date)val;break;
-			case 1:this.betrag=(Double)val;break;
-			case 2:this.kategorie=(Kategorie)val;break;
-			case 3:this.genehmigt=(Boolean)val;break;
-			case 4:this.beschreibung=(String)val;break;
-			default:Object o=new Object[]{}[1];//shorter than "throw new IndexOutOfBoundsException()"
+			this.set(i,(String)val);
+		}
+		catch(ClassCastException ex)
+		{
+			this.set(i,val.toString());
+		}
+	}
+
+	public void set(int i,String val)
+	{
+		try
+		{
+			switch(i)
+			{
+				case 0:this.datum=new Date(val);break;
+				case 1:this.betrag=new Double(val);break;
+				case 2:this.kategorie=Kategorie.valueOf(val);break;
+				case 3:this.genehmigt=new Boolean(val);break;
+				case 4:this.beschreibung=new String(val);break;
+				//default:val=new String[]{}[1];break;//shorter than "throw new IndexOutOfBoundsException()"
+			}
+		}
+		catch(NumberFormatException ex)
+		{
+		}
+		catch(IllegalArgumentException ex)
+		{
 		}
 	}
     

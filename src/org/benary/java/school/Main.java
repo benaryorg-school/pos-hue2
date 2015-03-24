@@ -22,6 +22,7 @@ public class Main
 
 		final MyTableModel tm=new MyTableModel();
 		JTable tab=new JTable(tm);
+		//TODO:tab.setDefaultRenderer(Date.class,);
 		JScrollPane pane=new JScrollPane(tab);
 		f.add(pane,BorderLayout.CENTER);
 
