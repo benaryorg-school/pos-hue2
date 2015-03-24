@@ -1,8 +1,10 @@
 package org.benary.java.school;
 
+import com.toedter.calendar.JDateChooserCellEditor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Date;
 import spesen.Spesen;
 
 /**
@@ -22,7 +24,7 @@ public class Main
 
 		final MyTableModel tm=new MyTableModel();
 		JTable tab=new JTable(tm);
-		//TODO:tab.setDefaultRenderer(Date.class,);
+		TODO:tab.setDefaultEditor(Date.class,new JDateChooserCellEditor());
 		JScrollPane pane=new JScrollPane(tab);
 		f.add(pane,BorderLayout.CENTER);
 
