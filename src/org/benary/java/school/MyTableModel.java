@@ -55,7 +55,7 @@ public class MyTableModel extends AbstractTableModel
 
 	public void setValueAt(Object aValue,int rowIndex,int columnIndex)
 	{
-		list.get(rowIndex).set(columnIndex+4,aValue);
+		list.get(rowIndex).set(columnIndex,aValue);
 	}
 }
 
