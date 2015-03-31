@@ -27,4 +27,5 @@ build/%.class: src/%.java
 
 clean:
 	rm -rf build/*
+	rm -rf dist/*
 
