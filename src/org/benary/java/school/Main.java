@@ -4,7 +4,8 @@ package org.benary.java.school;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
+import java.util.*;
+import java.io.*;
 import spesen.Spesen;
 
 /**
@@ -16,13 +17,49 @@ public class Main
 
 	public static void main(String... args)
 	{
+		final java.util.List<Spesen> list=new ArrayList<Spesen>();
+		try
+		{
+			BufferedReader read=new BufferedReader(new InputStreamReader(new FileInputStream(new File("file.csv"))));
+			String line;
+			while((line=read.readLine())!=null)
+			{
+				Spesen s=Spesen.parse(line);
+				if(s!=null)
+				{
+					list.add(s);
+				}
+			}
+		}
+		catch(IOException ex)
+		{
+		}
+
 		final JFrame f=new JFrame();
+		f.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				try
+				{
+					PrintWriter write=new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File("file.csv"))));
+					for(Spesen s:list)
+					{
+						write.println(Spesen.print(s));
+					}
+				}
+				catch(IOException ex)
+				{
+				}
+			}
+		});
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		f.setLocationRelativeTo(null);
 
 		f.setLayout(new BorderLayout());
 
 		final MyTableModel tm=new MyTableModel();
+		tm.add(list.toArray(new Spesen[0]));
 		final JTable tab=new JTable(tm);
 		tab.setDefaultEditor(Spesen.kategories(),new DefaultCellEditor(new JComboBox(Spesen.kategorievalues())));
 		//tab.setDefaultEditor(Date.class,new JDateChooserCellEditor());

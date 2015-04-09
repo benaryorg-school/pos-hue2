@@ -5,6 +5,7 @@
 package spesen;
 
 import java.util.*;
+import java.text.*;
 
 /**
  *
@@ -52,6 +53,37 @@ public class Spesen {
 		this.beschreibung=description;
 	}
 
+	public static String print(Spesen s)
+	{
+		return new StringBuilder(new SimpleDateFormat("dd.MM.yyyy").format((Date)s.get(0)))
+			.append(';').append(String.format("%.2f",s.get(1)))
+			.append(';').append((Integer)s.get(2))
+			.append(';').append((Boolean)s.get(3))
+			.append(';').append((String)s.get(4))
+			.toString();
+	}
+
+	public static Spesen parse(String s)
+	{
+		String []f=s.split(";");
+		if(f.length!=5)
+		{
+			return null;
+		}
+		try
+		{
+			return new Spesen(new SimpleDateFormat("dd.MM.yyyy").parse(f[0]),new Double(f[1]),Kategorie.values()[Integer.parseInt(f[2])],f[3].equals("true"),f[4]);
+		}
+		catch(NumberFormatException ex)
+		{
+			return null;
+		}
+		catch(ParseException ex)
+		{
+			return null;
+		}
+	}
+
 	public static Class<?> kategories()
 	{
 		return Kategorie.class;
@@ -73,36 +105,18 @@ public class Spesen {
     
 	public void set(int i,Object val)
 	{
-		try
+		switch(i)
 		{
-			this.set(i,(String)val);
-		}
-		catch(ClassCastException ex)
-		{
-			this.set(i,val.toString());
+			case 1:this.betrag=(Double)val;break;
+			case 2:this.kategorie=Kategorie.valueOf((String)val);break;
+			case 3:this.genehmigt=(Boolean)val;break;
+			case 4:this.beschreibung=(String)val;break;
+			//default:val=new String[]{}[1];break;//shorter than "throw new IndexOutOfBoundsException()"
 		}
 	}
 
 	public void set(int i,String val)
 	{
-		try
-		{
-			switch(i)
-			{
-				case 0:this.datum=new Date(val);break;
-				case 1:this.betrag=new Double(val);break;
-				case 2:this.kategorie=Kategorie.valueOf(val);break;
-				case 3:this.genehmigt=new Boolean(val);break;
-				case 4:this.beschreibung=new String(val);break;
-				//default:val=new String[]{}[1];break;//shorter than "throw new IndexOutOfBoundsException()"
-			}
-		}
-		catch(NumberFormatException ex)
-		{
-		}
-		catch(IllegalArgumentException ex)
-		{
-		}
 	}
     
     public static void main(String[] args) {
