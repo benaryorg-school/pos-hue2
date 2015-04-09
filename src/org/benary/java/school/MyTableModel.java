@@ -18,7 +18,7 @@ public class MyTableModel extends AbstractTableModel
 	public void add(int i,Spesen... s)
 	{
 		this.list.addAll(i,Arrays.asList(s));
-		fireTableRowsInserted(i,i+s.length);
+		fireTableRowsInserted(i,i+s.length-1);
 	}
 
 	public void remove(int i)
