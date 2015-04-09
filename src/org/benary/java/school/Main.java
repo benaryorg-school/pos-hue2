@@ -30,6 +30,7 @@ public class Main
 					list.add(s);
 				}
 			}
+			read.close();
 		}
 		catch(IOException ex)
 		{
@@ -47,6 +48,7 @@ public class Main
 					{
 						write.println(Spesen.print(s));
 					}
+					write.close();
 				}
 				catch(IOException ex)
 				{
