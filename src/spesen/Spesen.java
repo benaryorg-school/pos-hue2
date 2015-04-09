@@ -4,7 +4,7 @@
  */
 package spesen;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  *
@@ -55,6 +55,15 @@ public class Spesen {
 	public static Class<?> kategories()
 	{
 		return Kategorie.class;
+	}
+	public static String[] kategorievalues()
+	{
+		List<String> l=new ArrayList<String>();
+		for(Kategorie s:Kategorie.values())
+		{
+			l.add(s.toString());
+		}
+		return l.toArray(new String[0]);
 	}
 
 	public Object get(int col)

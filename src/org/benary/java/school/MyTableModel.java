@@ -10,15 +10,21 @@ public class MyTableModel extends AbstractTableModel
 	//FUCK JAVA
 	List<Spesen> list=new ArrayList<Spesen>();
 
-	public void add(Spesen s)
+	public void add(Spesen... s)
 	{
 		this.add(this.list.size(),s);
 	}
 	
-	public void add(int i,Spesen s)
+	public void add(int i,Spesen... s)
 	{
-		this.list.add(i,s);
-		fireTableRowsInserted(i,i);
+		this.list.addAll(i,Arrays.asList(s));
+		fireTableRowsInserted(i,i+s.length);
+	}
+
+	public void remove(int i)
+	{
+		this.list.remove(i);
+		fireTableRowsDeleted(i,i);
 	}
 
 	public int getRowCount()
@@ -61,6 +67,16 @@ public class MyTableModel extends AbstractTableModel
 	public void setValueAt(Object aValue,int rowIndex,int columnIndex)
 	{
 		list.get(rowIndex).set(columnIndex,aValue);
+	}
+
+	public double sum()
+	{
+		double su=0;
+		for(Spesen s:list)
+		{
+			su+=(Double)s.get(1);
+		}
+		return su;
 	}
 }
 
