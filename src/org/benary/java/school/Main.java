@@ -1,6 +1,6 @@
 package org.benary.java.school;
 
-//import com.toedter.calendar.JDateChooserCellEditor;
+import com.toedter.calendar.JDateChooserCellEditor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -37,6 +37,21 @@ public class Main
 		}
 
 		final JFrame f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		f.setLocationRelativeTo(null);
+
+		f.setLayout(new BorderLayout());
+
+		final MyTableModel tm=new MyTableModel();
+		tm.add(list.toArray(new Spesen[0]));
+		final JTable tab=new JTable(tm);
+		tab.setDefaultEditor(Spesen.kategories(),new DefaultCellEditor(new JComboBox(Spesen.kategorievalues())));
+		tab.setDefaultEditor(Date.class,new JDateChooserCellEditor());
+		tab.setDefaultRenderer(Double.class,new MyDoubleRenderer());
+		JScrollPane pane=new JScrollPane(tab);
+		f.add(pane,BorderLayout.CENTER);
+		
+		
 		f.addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent e)
@@ -44,7 +59,7 @@ public class Main
 				try
 				{
 					PrintWriter write=new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File("file.csv"))));
-					for(Spesen s:list)
+					for(Spesen s:tm.list())
 					{
 						write.println(Spesen.print(s));
 					}
@@ -55,19 +70,6 @@ public class Main
 				}
 			}
 		});
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		f.setLocationRelativeTo(null);
-
-		f.setLayout(new BorderLayout());
-
-		final MyTableModel tm=new MyTableModel();
-		tm.add(list.toArray(new Spesen[0]));
-		final JTable tab=new JTable(tm);
-		tab.setDefaultEditor(Spesen.kategories(),new DefaultCellEditor(new JComboBox(Spesen.kategorievalues())));
-		//tab.setDefaultEditor(Date.class,new JDateChooserCellEditor());
-		tab.setDefaultRenderer(Double.class,new MyDoubleRenderer());
-		JScrollPane pane=new JScrollPane(tab);
-		f.add(pane,BorderLayout.CENTER);
 
 		JPanel panel=new JPanel();
 		panel.setLayout(new GridLayout());

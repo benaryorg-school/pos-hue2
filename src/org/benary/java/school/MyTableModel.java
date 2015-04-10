@@ -8,7 +8,7 @@ public class MyTableModel extends AbstractTableModel
 {
 	//Java has no constructor initialisation of variables http://stackoverflow.com/questions/6822422/c-where-to-initialize-variables-in-constructor
 	//FUCK JAVA
-	List<Spesen> list=new ArrayList<Spesen>();
+	private List<Spesen> list=new ArrayList<Spesen>();
 
 	public void add(Spesen... s)
 	{
@@ -19,6 +19,11 @@ public class MyTableModel extends AbstractTableModel
 	{
 		this.list.addAll(i,Arrays.asList(s));
 		fireTableRowsInserted(i,i+s.length-1);
+	}
+	
+	public Collection<Spesen> list()
+	{
+		return new ArrayList(this.list);
 	}
 
 	public void remove(int i)
@@ -42,7 +47,7 @@ public class MyTableModel extends AbstractTableModel
 		//Java has no Internalisation. http://doc.qt.io/qt-5/internationalization.html
 		//FUCK JAVA
 		//return new String[]{""}[columnIndex];
-		return "***";
+		return super.getColumnName(columnIndex);
 	}
 
 	public Class<?> getColumnClass(int columnIndex)
